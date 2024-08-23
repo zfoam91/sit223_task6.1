@@ -4,57 +4,54 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building the project...'
+                echo 'Building the project using Maven'
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                echo 'Running unit and integration tests...'
+                echo 'Running unit and integration tests with Selenium'
             }
         }
         stage('Code Analysis') {
             steps {
-                echo 'Analyzing code quality...'
+                echo 'Analyzing code quality with SonarQube'
             }
         }
         stage('Security Scan') {
             steps {
-                echo 'Performing security scan...'
+                echo 'Performing security scan with OWASP Dependency Check'
             }
         }
         stage('Deploy to Staging') {
             steps {
-                echo 'Deploying to staging server...'
+                echo 'Deploying to staging server with AWS CLI'
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo 'Running integration tests on staging...'
+                echo 'Running integration tests on staging with Selenium'
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo 'Deploying to production server...'
+                echo 'Deploying to production server AWS CLI'
             }
         }
     }
 
     post {
         success {
-            emailext (
-                to: 'developer@example.com',
-                subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
-                body: "The pipeline has completed successfully.",
-                attachLog: true
-            )
+            mail to: "azelmaava@gmail.com",
+            subject: "Build Status Email",
+            body: "Build was successful!",
+            attachLog: true
+            
         }
         failure {
-            emailext (
-                to: 'developer@example.com',
-                subject: "Pipeline Failed: ${currentBuild.fullDisplayName}",
-                body: "The pipeline has failed. Please check the logs.",
-                attachLog: true
-            )
+            mail to: "azelmaava@gmail.com",
+            subject: "Build Status Email",
+            body: "Build was unsuccessful!",
+            attachLog: true
         }
     }
 }
