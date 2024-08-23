@@ -44,7 +44,7 @@ pipeline {
                 to: "azelmaava@gmail.com",
                 subject: "Build Status Email - SUCCESS",
                 body: "Build was successful!",
-                attachLog: true
+                //attachLog: true
             )
         }
         failure {
